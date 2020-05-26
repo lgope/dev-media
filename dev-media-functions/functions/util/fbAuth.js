@@ -1,4 +1,4 @@
-const {admin} = require('./admin');
+const {admin, db} = require('./admin');
 
 // Authentication middleware
 module.exports = (req, res, next) => {
@@ -19,7 +19,6 @@ module.exports = (req, res, next) => {
     .verifyIdToken(idToken)
     .then(decodedToken => {
       req.user = decodedToken;
-      console.log(decodedToken);
       return db
         .collection('users')
         .where('userId', '==', req.user.uid)
