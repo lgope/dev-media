@@ -12,18 +12,29 @@ exports.getAllScreams = (req, res) => {
           body: doc.data().body,
           userHandle: doc.data().userHandle,
           createdAt: doc.data().createdAt,
+          commentCount: doc.data().commentCount,
+          likeCount: doc.data().likeCount,
         });
       });
       return res.json(screams);
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: err.code });
+    });
 };
 
 exports.postOneScream = (req, res) => {
+  if (req.body.body.trim() === '') {
+    return res.status(400).json({ body: 'Body must not be empty' });
+  }
+
   const newScream = {
     body: req.body.body,
     userHandle: req.user.handle,
     createdAt: new Date().toISOString(),
+    likeCount: 0,
+    commentCount: 0,
   };
 
   db.collection('screams')
