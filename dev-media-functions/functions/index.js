@@ -4,7 +4,13 @@ const app = require('express')();
 const FBAuth = require('./util/fbAuth');
 
 const { getAllScreams, postOneScream } = require('./handlers/screams');
-const { signup, login, uploadImage } = require('./handlers/users');
+const {
+  signup,
+  login,
+  uploadImage,
+  addUserDetails,
+  getAuthenticatedUser,
+} = require('./handlers/users');
 
 // get data from firestore || screams route
 app.get('/screams', getAllScreams);
@@ -12,13 +18,18 @@ app.get('/screams', getAllScreams);
 app.post('/scream', FBAuth, postOneScream);
 
 // users routes
+// image upload route
+app.post('/user/image', FBAuth, uploadImage);
+// Add user details route
+app.post('/user', FBAuth, addUserDetails);
+
+// To get Authenticated User
+app.get('/user', FBAuth, getAuthenticatedUser);
+
 // Sign UP route
 app.post('/signup', signup);
 // login routes
 app.post('/login', login);
-
-// image upload route
-app.post('/users/image', FBAuth, uploadImage);
 
 exports.api = functions.https.onRequest(app);
 
