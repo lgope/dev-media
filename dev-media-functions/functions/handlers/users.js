@@ -17,6 +17,7 @@ const {
   reduceUserDetails,
 } = require('../util/validators');
 
+// sign up
 exports.signup = (req, res) => {
   const newUser = {
     email: req.body.email,
@@ -69,7 +70,9 @@ exports.signup = (req, res) => {
       if (err.code === 'auth/email-already-in-use') {
         return res.status(400).json({ email: 'Email is already exits!' });
       } else {
-        return res.status(500).json({ error: err.code });
+        return res
+          .status(500)
+          .json({ error: 'Something went wrong. Please try again!' });
       }
     });
 };
@@ -95,12 +98,12 @@ exports.login = (req, res) => {
       return res.json({ token });
     })
     .catch(err => {
+      // auth/wrong-password
+      // auth/user-not-found
       console.error(err);
-      if (err.code === 'auth/wrong-password') {
-        return res
-          .status(403)
-          .json({ genral: 'Wrong credentials, Please try again!' });
-      } else return res.status(500).json({ error: err.code });
+      return res
+        .status(403)
+        .json({ genral: 'Wrong credentials, Please try again!' });
     });
 };
 
@@ -259,20 +262,19 @@ exports.getUserDetails = (req, res) => {
     });
 };
 
-
 // mark notifications read functionality
 exports.markNotificationsRead = (req, res) => {
   let batch = db.batch();
-  req.body.forEach((notificationId) => {
+  req.body.forEach(notificationId => {
     const notification = db.doc(`/notifications/${notificationId}`);
     batch.update(notification, { read: true });
   });
   batch
     .commit()
     .then(() => {
-      return res.json({ message: "Notifications marked read" });
+      return res.json({ message: 'Notifications marked read' });
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
       return res.status(500).json({ error: err.code });
     });
