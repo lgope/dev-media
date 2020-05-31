@@ -11,6 +11,7 @@ exports.getAllScreams = (req, res) => {
           screamId: doc.id,
           body: doc.data().body,
           userHandle: doc.data().userHandle,
+          userImage: doc.data().userImage,
           createdAt: doc.data().createdAt,
           commentCount: doc.data().commentCount,
           likeCount: doc.data().likeCount,
@@ -234,4 +235,3 @@ exports.deleteScream = (req, res) => {
       return res.status(500).json({ error: 'Something went wrong!' });
     });
 };
-
