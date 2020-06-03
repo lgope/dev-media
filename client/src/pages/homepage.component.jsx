@@ -14,7 +14,6 @@ export class Homepage extends Component {
     axios
       .get('/screams')
       .then(res => {
-        console.log(res.data);
         this.setState({ screams: res.data });
       })
       .catch(err => console.error(err));
