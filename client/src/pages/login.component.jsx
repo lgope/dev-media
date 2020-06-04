@@ -30,6 +30,15 @@ const styles = {
   },
   button: {
     margineTop: 20,
+    position: 'relative',
+  },
+  customError: {
+    color: 'red',
+    fontSize: '0.8rem',
+    marginTop: 10,
+  },
+  progress: {
+    position: 'absolute',
   },
 };
 
@@ -43,11 +52,26 @@ export class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({ loading: true });
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
-    this.props.loginUser(userData, this.props.history);
+    // this.props.loginUser(userData, this.props.history);
+    axios
+      .post('/login', userData)
+      .then(res => {
+        console.log(res.data);
+
+        this.setState({ loading: false });
+        this.props.history.push('/');
+      })
+      .catch(error => {
+        this.setState({
+          errors: error.response.data,
+          loading: false,
+        });
+      });
   };
   handleChange = event => {
     this.setState({
@@ -111,7 +135,7 @@ export class Login extends Component {
             </Button>
             <br />
             <small>
-              dont have an account ? sign up <Link to='/signup'>here</Link>
+              Dont have an account ? sign up <Link to='/signup'>here</Link>
             </small>
           </form>
         </Grid>
