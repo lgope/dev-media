@@ -5,6 +5,11 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwtDecode from 'jwt-decode';
 
+
+// All Redux
+import {Provider} from 'react-redux'
+import store from './redux/store'
+
 // All components
 import Navbar from './components/navbar.component';
 import themeObj from './utils/theme';
@@ -36,7 +41,7 @@ if (token) {
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <div className='App'>
+      <Provider store={store}>
         <Router>
           <Navbar />
           <div className='container'>
@@ -47,7 +52,7 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </div>
+      </Provider>
     </MuiThemeProvider>
   );
 }
