@@ -47,6 +47,7 @@ export const logoutUser = () => dispatch => {
 };
 
 export const getUserData = () => dispatch => {
+  dispatch({ type: actions.LOADING_USER });
   axios
     .get('/user')
     .then(res => {

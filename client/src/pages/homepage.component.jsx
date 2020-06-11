@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+// All Material Stuff
 import Grid from '@material-ui/core/Grid';
 
 // all components
 import Scream from '../components/scream/scream.component';
+import Profile from '../components/profile/profile.component';
 
 export class Homepage extends Component {
   state = {
@@ -35,7 +38,7 @@ export class Homepage extends Component {
         </Grid>
 
         <Grid item sm={4} xs={12}>
-          <p>Profile Details..</p>
+          <Profile />
         </Grid>
       </Grid>
     );
