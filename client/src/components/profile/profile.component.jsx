@@ -8,8 +8,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import MuiLink from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
+import Tooltip from '@material-ui/core/Tooltip';
 // All Icons Staff
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
@@ -19,14 +21,25 @@ import CalendarToday from '@material-ui/icons/CalendarToday';
 
 // All Redux Staff
 import { connect } from 'react-redux';
-// import { logoutUser, uploadImage } from '../../redux/actions/userActions';
-import { logoutUser } from '../../redux/actions/userActions';
+import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 const styles = theme => ({
   ...theme.spreadThis,
 });
 
 class Profile extends Component {
+  handleImageChange = event => {
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+    this.props.uploadImage(formData);
+  };
+
+  handleEditPicture = () => {
+    const fileInput = document.getElementById('imageInput');
+    fileInput.click();
+  };
+
   render() {
     const {
       classes,
@@ -56,13 +69,15 @@ class Profile extends Component {
               >
                 <EditIcon color='primary' />
               </MyButton> */}
-              <Button
-                tip='Edit profile picture'
-                onClick={this.handleEditPicture}
-                btnClassName='button'
-              >
-                <EditIcon color='primary' />
-              </Button>
+              <Tooltip title='Add new profile picture!' placement='top'>
+                <IconButton
+                  tip='Edit profile picture'
+                  onClick={this.handleEditPicture}
+                  btnClassName='button'
+                >
+                  <EditIcon color='primary' />
+                </IconButton>
+              </Tooltip>
             </div>
             <hr />
             <div className='profile-details'>
@@ -139,12 +154,11 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-// const mapActionsToProps = { logoutUser, uploadImage };
-const mapActionsToProps = { logoutUser };
+const mapActionsToProps = { logoutUser, uploadImage };
 
 Profile.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  //   uploadImage: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
 };
