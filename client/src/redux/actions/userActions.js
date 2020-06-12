@@ -57,14 +57,25 @@ export const getUserData = () => dispatch => {
 };
 
 // upload profile Image
-export const uploadImage = (formData) => (dispatch) => {
+export const uploadImage = formData => dispatch => {
   dispatch({ type: actions.LOADING_USER });
   axios
     .post('/user/image', formData)
     .then(() => {
       dispatch(getUserData());
     })
-    .catch((err) => console.eror(err));
+    .catch(err => console.eror(err));
+};
+
+// Edit User Details
+export const editUserDetails = userDetails => dispatch => {
+  dispatch({ type: actions.LOADING_USER });
+  axios
+    .post('/user', userDetails)
+    .then(() => {
+      dispatch(getUserData());
+    })
+    .catch(err => console.error(err));
 };
 
 const setAuthorizationHeader = token => {
