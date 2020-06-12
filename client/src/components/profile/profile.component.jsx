@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import EditDetails from './editDetails.component';
 
 // All Material UI stuff
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -33,6 +34,11 @@ class Profile extends Component {
     const formData = new FormData();
     formData.append('image', image, image.name);
     this.props.uploadImage(formData);
+  };
+
+  // logout
+  handleLogout = () => {
+    this.props.logoutUser();
   };
 
   handleEditPicture = () => {
@@ -114,7 +120,7 @@ class Profile extends Component {
             <Button tip='Logout' onClick={this.handleLogout}>
               <KeyboardReturn color='primary' />
             </Button>
-            {/* <EditDetails /> */}
+            <EditDetails />
           </div>
         </Paper>
       ) : (
