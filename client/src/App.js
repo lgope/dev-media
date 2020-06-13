@@ -12,7 +12,7 @@ import * as actions from './redux/actionTypes';
 import { logoutUser, getUserData } from './redux/actions/userActions';
 
 // All components
-import Navbar from './components/navbar.component';
+import Navbar from './components/Navbar/navbar.component';
 import themeObj from './utils/theme';
 import AuthRoute from './utils/AuthRoute';
 
