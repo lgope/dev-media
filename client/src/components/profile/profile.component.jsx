@@ -2,17 +2,16 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import MyButton from '../../utils/MyButton';
 import EditDetails from './editDetails.component';
 
 // All Material UI stuff
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import MuiLink from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
-import Tooltip from '@material-ui/core/Tooltip';
 // All Icons Staff
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
@@ -68,22 +67,13 @@ class Profile extends Component {
                 hidden='hidden'
                 onChange={this.handleImageChange}
               />
-              {/* <MyButton
+              <MyButton
                 tip='Edit profile picture'
                 onClick={this.handleEditPicture}
                 btnClassName='button'
               >
                 <EditIcon color='primary' />
-              </MyButton> */}
-              <Tooltip title='Add new profile picture!' placement='top'>
-                <IconButton
-                  tip='Edit profile picture'
-                  onClick={this.handleEditPicture}
-                  btnClassName='button'
-                >
-                  <EditIcon color='primary' />
-                </IconButton>
-              </Tooltip>
+              </MyButton>
             </div>
             <hr />
             <div className='profile-details'>
@@ -117,9 +107,9 @@ class Profile extends Component {
               <CalendarToday color='primary' />{' '}
               <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
             </div>
-            <Button tip='Logout' onClick={this.handleLogout}>
+            <MyButton tip='Logout' onClick={this.handleLogout}>
               <KeyboardReturn color='primary' />
-            </Button>
+            </MyButton>
             <EditDetails />
           </div>
         </Paper>
