@@ -32,6 +32,32 @@ export default function (state = initialState, action) {
         loading: true,
       };
 
+    case actions.LIKE_SCREAM:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
+            userHandle: state.credentials.handle,
+            screamId: action.payload.screamId,
+          },
+        ],
+      };
+      
+    case actions.UNLIKE_SCREAM:
+      return {
+        ...state,
+        likes: state.likes.filter(
+          like => like.screamId !== action.payload.screamId
+        ),
+      };
+
+    case actions.MARK_NOTIFICATIONS_READ:
+      state.notifications.forEach(not => (not.read = true));
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }
