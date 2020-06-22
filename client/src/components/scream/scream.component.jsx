@@ -79,13 +79,13 @@ export class Scream extends Component {
     } = this.props;
 
     const likeButton = !authenticated ? (
-      <MyButton tip='Like'>
-        <Link to='/login'>
+      <Link to='/login'>
+        <MyButton tip='Like'>
           <FavoriteBorder color='primary' />
-        </Link>
-      </MyButton>
+        </MyButton>
+      </Link>
     ) : this.likedScream() ? (
-      <MyButton tip='Undo Like' onClick={this.unlikeScream}>
+      <MyButton tip='Undo like' onClick={this.unlikeScream}>
         <FavoriteIcon color='primary' />
       </MyButton>
     ) : (
@@ -150,8 +150,14 @@ Scream.propTypes = {
 
 const mapStateToProps = state => ({
   user: state.user,
-  likeScream,
-  unlikeScream,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Scream));
+const mapActionsToProps = {
+  likeScream,
+  unlikeScream,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(Scream));

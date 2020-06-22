@@ -46,12 +46,12 @@ class DeleteScream extends Component {
           <DeleteOutline color='secondary' />
         </MyButton>
         <Dialog
-          open={this.state.ope}
+          open={this.state.open}
           onClose={this.handleClose}
           fullWidth
           maxWidth='sm'
         >
-          <DialogTitle>Are you sure to delete this scream? 🤔</DialogTitle>
+          <DialogTitle>Are you sure to delete this scream? </DialogTitle>
           <DialogActions>
             <Button onClick={this.handleClose} color='primary'>
               Cancel
