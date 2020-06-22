@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // other stuff
 import MyButton from '../../utils/MyButton';
+import DeleteScream from './deleteScream.component';
 
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -71,7 +72,10 @@ export class Scream extends Component {
         likeCount,
         commentCount,
       },
-      user: { authenticated },
+      user: {
+        authenticated,
+        credentials: { handle },
+      },
     } = this.props;
 
     const likeButton = !authenticated ? (
@@ -89,6 +93,12 @@ export class Scream extends Component {
         <FavoriteBorder color='primary' />
       </MyButton>
     );
+
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteScream screamId={screamId} />
+      ) : null;
+
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -105,7 +115,7 @@ export class Scream extends Component {
           >
             {userHandle}
           </Typography>
-          {/* {deleteButton} */}
+          {deleteButton}
           <Typography variant='body2' color='textSecondary'>
             {dayjs(createdAt).fromNow()}
           </Typography>

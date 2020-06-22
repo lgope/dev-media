@@ -45,3 +45,13 @@ export const unlikeScream = screamId => dispatch => {
     })
     .catch(err => console.error(err));
 };
+
+// delete Scream by id
+export const deleteScream = screamId => dispatch => {
+  axios
+    .delete(`/scream/${screamId}`)
+    .then(() => {
+      dispatch({ type: actions.DELETE_SCREAM, payload: screamId });
+    })
+    .catch(err => console.error(err));
+};
