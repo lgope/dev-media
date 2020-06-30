@@ -64,6 +64,20 @@ export default function (state = initialState, action) {
         },
       };
 
+    case actions.POST_SCREAM:
+      return {
+        ...state,
+        screams: [action.payload, ...state.screams],
+      };
+
+    case actions.DELETE_SCREAM:
+      index = state.screams.findIndex(
+        scream => scream.screamId === action.payload
+      );
+      state.screams.splice(index, 1);
+      return {
+        ...state,
+      };
     default:
       return state;
   }
