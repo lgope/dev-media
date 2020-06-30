@@ -1,6 +1,26 @@
 import * as actions from '../actionTypes';
 import axios from 'axios';
 
+// Post/create a scream
+export const postScream = newScream => dispatch => {
+  dispatch({ type: actions.LOADING_UI });
+  axios
+    .post('/scream', newScream)
+    .then(res => {
+      dispatch({
+        type: actions.POST_SCREAM,
+        payload: res.data,
+      });
+      // dispatch(clearErrors());
+    })
+    .catch(error => {
+      dispatch({
+        type: actions.SET_ERRORS,
+        payload: error.response.data,
+      });
+    });
+};
+
 // Get all screams from back-end
 export const getScreams = () => dispatch => {
   dispatch({ type: actions.LOADING_DATA });
