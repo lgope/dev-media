@@ -11,7 +11,7 @@ export const postScream = newScream => dispatch => {
         type: actions.POST_SCREAM,
         payload: res.data,
       });
-      // dispatch(clearErrors());
+      dispatch(clearErrors());
     })
     .catch(error => {
       dispatch({
@@ -38,6 +38,21 @@ export const getScreams = () => dispatch => {
         payload: [],
       });
     });
+};
+
+// get one scream
+export const getScream = (screamId) => (dispatch) => {
+  dispatch({ type: actions.LOADING_UI });
+  axios
+    .get(`/scream/${screamId}`)
+    .then((res) => {
+      dispatch({
+        type: actions.SET_SCREAM,
+        payload: res.data
+      });
+      dispatch({ type: actions.STOP_LOADING_UI });
+    })
+    .catch((error) => console.error(error));
 };
 
 // like a scream
@@ -74,4 +89,9 @@ export const deleteScream = screamId => dispatch => {
       dispatch({ type: actions.DELETE_SCREAM, payload: screamId });
     })
     .catch(err => console.error(err));
+};
+
+// clear errors
+export const clearErrors = () => dispatch => {
+  dispatch({ type: actions.CLEAR_ERRORS });
 };
