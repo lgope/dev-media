@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 // other stuff
 import MyButton from '../../utils/MyButton';
 import DeleteScream from './deleteScream.component';
+import ScreamDialog from './screamDialog.component';
 
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -128,11 +129,11 @@ export class Scream extends Component {
           </MyButton>
 
           <span>{commentCount} comments</span>
-          {/* <ScreamDialog
+          <ScreamDialog
             screamId={screamId}
             userHandle={userHandle}
-            openDialog={this.props.openDialog}
-          /> */}
+            // openDialog={this.props.openDialog}
+          />
         </CardContent>
       </Card>
     );
