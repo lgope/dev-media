@@ -41,18 +41,18 @@ export const getScreams = () => dispatch => {
 };
 
 // get one scream
-export const getScream = (screamId) => (dispatch) => {
+export const getScream = screamId => dispatch => {
   dispatch({ type: actions.LOADING_UI });
   axios
     .get(`/scream/${screamId}`)
-    .then((res) => {
+    .then(res => {
       dispatch({
         type: actions.SET_SCREAM,
-        payload: res.data
+        payload: res.data,
       });
       dispatch({ type: actions.STOP_LOADING_UI });
     })
-    .catch((error) => console.error(error));
+    .catch(error => console.error(error));
 };
 
 // like a scream
