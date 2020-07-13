@@ -15,7 +15,7 @@ const styles = theme => ({
   ...theme.spreadThis,
 });
 
-export class CommentForm extends Component {
+class CommentForm extends Component {
   state = {
     body: '',
     errors: {},
@@ -48,7 +48,7 @@ export class CommentForm extends Component {
           <TextField
             name='body'
             type='text'
-            label='Comment on scream'
+            label='Comment on scream!'
             error={errors.comment ? true : false}
             helperText={errors.comment}
             value={this.state.body}

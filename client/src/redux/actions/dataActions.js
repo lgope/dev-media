@@ -91,6 +91,25 @@ export const deleteScream = screamId => dispatch => {
     .catch(err => console.error(err));
 };
 
+// Submit a comment for screams
+export const submitComment = (screamId, commentData) => dispatch => {
+  axios
+    .post(`/scream/${screamId}/comment`, commentData)
+    .then(res => {
+      dispatch({
+        type: actions.SUBMIT_COMMENT,
+        payload: res.data,
+      });
+      dispatch(clearErrors());
+    })
+    .catch(err => {
+      dispatch({
+        type: actions.SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
 // clear errors
 export const clearErrors = () => dispatch => {
   dispatch({ type: actions.CLEAR_ERRORS });
