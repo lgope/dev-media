@@ -50,6 +50,11 @@ function App() {
               <AuthRoute exact path='/login' component={login} />
               <AuthRoute exact path='/signup' component={signup} />
               <Route exact path='/users/:handle' component={UserPage} />
+              <Route
+                exact
+                path='/users/:handle/scream/:screamId'
+                component={UserPage}
+              />
             </Switch>
           </div>
         </Router>

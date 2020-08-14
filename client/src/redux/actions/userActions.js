@@ -78,6 +78,18 @@ export const editUserDetails = userDetails => dispatch => {
     .catch(err => console.error(err));
 };
 
+// mark notification read
+export const markNotificationsRead = notificationIds => dispatch => {
+  axios
+    .post('/notifications', notificationIds)
+    .then(res => {
+      dispatch({
+        type: actions.MARK_NOTIFICATIONS_READ,
+      });
+    })
+    .catch(err => console.log(err));
+};
+
 const setAuthorizationHeader = token => {
   const FBIdToken = `Bearer ${token}`;
   localStorage.setItem('FBIdToken', FBIdToken);
