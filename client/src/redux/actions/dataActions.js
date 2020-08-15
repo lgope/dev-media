@@ -110,6 +110,24 @@ export const submitComment = (screamId, commentData) => dispatch => {
     });
 };
 
+export const getUserData = userHandle => dispatch => {
+  dispatch({ type: actions.LOADING_DATA });
+  axios
+    .get(`/user/${userHandle}`)
+    .then(res => {
+      dispatch({
+        type: actions.SET_SCREAMS,
+        payload: res.data.screams,
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: actions.SET_SCREAMS,
+        payload: null,
+      });
+    });
+};
+
 // clear errors
 export const clearErrors = () => dispatch => {
   dispatch({ type: actions.CLEAR_ERRORS });

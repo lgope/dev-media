@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import jwtDecode from 'jwt-decode';import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 // All Redux
 import { Provider } from 'react-redux';
@@ -20,6 +21,7 @@ import AuthRoute from './utils/AuthRoute';
 import homepage from './pages/homepage.component';
 import login from './pages/login.component';
 import signup from './pages/signup.component';
+import UserPage from './pages/UserPage.component';
 
 const theme = createMuiTheme(themeObj);
 
@@ -27,7 +29,7 @@ const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
-    store.dispatch(logoutUser())
+    store.dispatch(logoutUser());
     window.location.href = '/login';
   } else {
     store.dispatch({ type: actions.SET_AUTHENTICATED });
@@ -45,17 +47,13 @@ function App() {
           <div className='container'>
             <Switch>
               <Route exact path='/' component={homepage} />
-              <AuthRoute
+              <AuthRoute exact path='/login' component={login} />
+              <AuthRoute exact path='/signup' component={signup} />
+              <Route exact path='/users/:handle' component={UserPage} />
+              <Route
                 exact
-                path='/login'
-                component={login}
-                
-              />
-              <AuthRoute
-                exact
-                path='/signup'
-                component={signup}
-                
+                path='/users/:handle/scream/:screamId'
+                component={UserPage}
               />
             </Switch>
           </div>
