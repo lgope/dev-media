@@ -4,6 +4,9 @@ const app = require('express')();
 const FBAuth = require('./util/fbAuth');
 const { db } = require('./util/admin');
 
+const cors = require('cors');
+app.use(cors());
+
 const {
   getAllScreams,
   postOneScream,
@@ -152,8 +155,8 @@ exports.onUserImageChange = functions.firestore
   });
 
 // on screams delete, delete all notifications related to this screams
-exports.onScreamDelete = functions
-  .firestore.document('/screams/{screamId}')
+exports.onScreamDelete = functions.firestore
+  .document('/screams/{screamId}')
   .onDelete((snapshot, context) => {
     const screamId = context.params.screamId;
     const batch = db.batch();
