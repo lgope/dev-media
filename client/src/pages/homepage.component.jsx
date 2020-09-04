@@ -26,7 +26,7 @@ export class Homepage extends Component {
     );
 
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={4}>
         <Grid item sm={8} xs={12}>
           {screamsMarkup}
         </Grid>

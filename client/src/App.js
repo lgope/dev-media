@@ -25,6 +25,8 @@ import UserPage from './pages/UserPage.component';
 
 const theme = createMuiTheme(themeObj);
 
+axios.defaults.baseURL = 'https://us-central1-dev-media-ae295.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
