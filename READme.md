@@ -42,4 +42,4 @@ And More ! There's always room for improvement!
 
 ## Deployed Version
 
-Feel free to visit 👉 🔃
+Feel free to visit 👉 https://dev-media-ae295.web.app/ or https://dev-media-ae295.firebaseapp.com/
