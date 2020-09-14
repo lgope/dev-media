@@ -17,7 +17,7 @@ Some of the standout features of the project are
 
 ## Technologies
 
-1. React.js, redux, react-redux, redux-thunk, material ui, axios, bootstrap (Front-end)
+1. React.js, redux, react-redux, redux-thunk, material ui, axios, firebase
 2. css (Styling)
 3. nodeJS, expressJS, MongoDB Atlas (Back-End)
 
