@@ -7,6 +7,6 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('Im-root')
+  document.getElementById('Im-groot')
 );
 
